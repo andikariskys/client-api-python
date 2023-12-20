@@ -11,12 +11,11 @@ class AmbilDataApi:
     
     # buat method untuk mengambil data dari API
     def ambil_data(self):
-        # menggunakan method GET untuk mengambil data dari server
-        respon = requests.get(self.__base_url)
-        # cek apakah dapat terhubung dengan API atau tidak
-        if respon.status_code == 200:
-            # jika dapat terhubung (status code = 200) maka ambil semua data dari response tersebut
-            
+        # cek menggunakan try except apakah dapat terhubung dengan server API atau tidak
+        try:
+            # menggunakan method GET untuk mengambil data dari server
+            respon = requests.get(self.__base_url)
+
             # buat dokumen untuk menyimpan data (nama dan value) dari API
             file = open("hasil.txt", "w")
             
@@ -39,9 +38,10 @@ class AmbilDataApi:
             file.close()
             # berikan pesan bahwa data dari link API sudah berhasil diambil
             print("Data dari API berhasil diambil, silakan buka file 'hasil.txt'")
-        else:
+            
+        except:
             # jika tidak dapat terhubung maka akan memunculkan pesan berikut berserta error code-nya
-            print("Gagal mengambil data dari server, error code: ", respon.status_code)
+            print("Gagal mengambil data dari server")
 
 # buat object dari class ModulRequest
 req = AmbilDataApi('https://fakestoreapi.com/products')
