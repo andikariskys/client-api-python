@@ -25,16 +25,12 @@ class AmbilDataApi:
             # buat perulangan untuk mengubah data dari json ke tipe dictionary
             for data in data_server:
                 # print(data)
-                # ambil key pada dictionary, untuk memberikan judul
-                api_keys = data.keys()
-                # print(api_keys)
-                # selanjutnya buat perulangan lagi untuk mengambil value dari dictionary yang telah dibuat diatas
-                for key in api_keys:
-                    # print(key)
-                    # buat format untuk menyimpan file (cth. Nama makanan : Pizza)
-                    # karena data pada API memiliki tipe data yang berbeda, maka kita ubah ke string terlebih dahulu
-                    key_value = key + ': ' + str(data[key]) + '\n'
-                    file.write(key_value)
+                # ambil value dari dictionary dengan format data['key'] lalu buat baris baru dibawahnya
+                file.write('Nama Produk: ' + data['title'] + '\n')
+                # karena key price pada dictionary menggunakan tipe data float, maka ubah terlebih dahulu menjadi string
+                file.write('Harga: $' + str(data['price']) + '\n')
+                file.write('Deskripsi: ' + data['description'] + '\n')
+                file.write('Foto Produk: ' + data['image'] + '\n')
                 
                 # setiap data yang diambil berikan jeda menggunakan enter pada file
                 file.write('\n')
